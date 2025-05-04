@@ -33,7 +33,7 @@ class Growmodo_Assets {
             true
         );
 
-        // Load banner JS
+        // Load banner JS (dismiss logic)
         wp_enqueue_script(
             'growmodo-banner',
             get_template_directory_uri() . '/assets/js/banner.js',

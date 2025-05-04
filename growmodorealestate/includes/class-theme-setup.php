@@ -2,6 +2,7 @@
 class Growmodo_Theme_Setup {
     public function __construct() {
         add_action('after_setup_theme', [$this, 'setup']);
+        add_action('widgets_init', [$this, 'register_widget_areas']);
         add_action( 'customize_register', [ $this, 'customizer_settings' ] );
 
     }
@@ -48,4 +49,37 @@ class Growmodo_Theme_Setup {
         ]);
     }
 
+
+    public function register_widget_areas() {
+        register_sidebar([
+            'name'          => __('Main Sidebar', 'growmodo'),
+            'id'            => 'main-sidebar',
+            'description'   => __('Appears on the right side of pages/posts.', 'growmodo'),
+            'before_widget' => '<section id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</section>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        ]);
+
+        register_sidebar([
+            'name'          => __('Footer Widgets', 'growmodo'),
+            'id'            => 'footer-widgets',
+            'description'   => __('Widgets area in the footer', 'growmodo'),
+            'before_widget' => '<div id="%1$s" class="footer-widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h4 class="footer-widget-title">',
+            'after_title'   => '</h4>',
+        ]);
+		
+		register_sidebar([
+			'name'          => esc_html__('Growmodo Widget Area', 'growmodo'),
+			'id'            => 'growmodo-widget-area',
+			'description'   => esc_html__('Add widgets here.', 'growmodo'),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+    ]);
+    }
+    
 }
